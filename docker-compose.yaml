@@ -1,0 +1,9 @@
+version: '3.1'
+
+services:
+  fairphone:
+    image: maestroalubia/fairphone2-build-env
+    volumes:
+      - ./fairphone_os:/var/fairphone_os/
+      - ./helper_scripts:/opt/helper_scripts
+
