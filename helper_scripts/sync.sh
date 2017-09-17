@@ -9,4 +9,4 @@ cd ${FP_WORKDIR}
 repo &> /dev/null || yes | repo init --depth=1 \
 	      -u http://code.fairphone.com/gerrit/fp2-dev/manifest \
 	      -b fp2-sibon
-repo sync -c
+time repo sync -c
