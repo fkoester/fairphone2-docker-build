@@ -42,10 +42,10 @@ ARG FAIRPHONE_UID
 RUN useradd -s /bin/bash -u ${FAIRPHONE_UID:-1000} -U -m fairphone
 
 # Install repo
-ARG REPO_VERSION=1.22
-ARG REPO_SHA1=da0514e484f74648a890c0467d61ca415379f791
+ARG REPO_VERSION=1.23
+ARG REPO_SHA256=e147f0392686c40cfd7d5e6f332c6ee74c4eab4d24e2694b3b0a0c037bf51dc5
 RUN curl https://storage.googleapis.com/git-repo-downloads/repo-${REPO_VERSION} -o /usr/local/bin/repo && \
-    echo "${REPO_SHA1} /usr/local/bin/repo" | sha1sum -c && \
+    echo "${REPO_SHA256} /usr/local/bin/repo" | sha256sum -c && \
     chmod +x /usr/local/bin/repo
 
 # Create working directory
@@ -56,5 +56,8 @@ VOLUME ${FP_DATA_VOLUME}
 WORKDIR ${FP_DATA_VOLUME}
 
 ENV PATH /opt/helper_scripts:$PATH
+ENV FP_LOGDIR /var/log/fairphone
+
+RUN mkdir -p ${FP_LOGDIR} && chown -R fairphone:fairphone ${FP_LOGDIR}
 
 USER fairphone
