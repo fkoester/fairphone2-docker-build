@@ -21,18 +21,6 @@ RUN dpkg --add-architecture i386 \
     unzip \
     curl \
     openssh-client \
-    gnupg \
-    flex \
-    build-essential \
-    zlib1g-dev \
-    gcc-multilib \
-    libc6-dev-i386 \
-    lib32ncurses5-dev \
-    x11proto-core-dev \
-    libx11-dev \
-    lib32z-dev \
-    libgl1-mesa-dev \
-    xsltproc \
     ca-certificates \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
@@ -48,16 +36,14 @@ RUN curl https://storage.googleapis.com/git-repo-downloads/repo-${REPO_VERSION} 
     echo "${REPO_SHA256} /usr/local/bin/repo" | sha256sum -c && \
     chmod +x /usr/local/bin/repo
 
-# Create working directory
-ENV FP_DATA_VOLUME=/var/fairphone_os/
-ENV FP_WORKDIR=${FP_DATA_VOLUME}/build
-RUN mkdir -p ${FP_WORKDIR} && chown -R fairphone:fairphone ${FP_DATA_VOLUME}
+# Setup working directory
+ENV FP_DATA_VOLUME /var/fairphone_os/
+ENV FP_WORKDIR ${FP_DATA_VOLUME}/build
+ENV FP_LOGDIR ${FP_DATA_VOLUME}/logs
+ENV PATH /opt/helper_scripts:$PATH
+
+RUN chown -R fairphone:fairphone ${FP_DATA_VOLUME}
 VOLUME ${FP_DATA_VOLUME}
 WORKDIR ${FP_DATA_VOLUME}
-
-ENV PATH /opt/helper_scripts:$PATH
-ENV FP_LOGDIR /var/log/fairphone
-
-RUN mkdir -p ${FP_LOGDIR} && chown -R fairphone:fairphone ${FP_LOGDIR}
 
 USER fairphone
