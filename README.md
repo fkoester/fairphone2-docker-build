@@ -6,7 +6,7 @@ Inspired by https://github.com/justfortherec/fairphone2-build-env
 This is a work in progress and probably does not work as expected yet. Stay tuned for updates!
 
 ```bash
-docker-compose run --rm fairphone
+docker-compose run --rm fp
 ```
 
 * Time for first sync: ~1h
