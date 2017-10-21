@@ -42,7 +42,7 @@ ENV FP_WORKDIR ${FP_DATA_VOLUME}/build
 ENV FP_LOGDIR ${FP_DATA_VOLUME}/logs
 ENV PATH /opt/helper_scripts:$PATH
 
-RUN chown -R fairphone:fairphone ${FP_DATA_VOLUME}
+RUN mkdir -p ${FP_DATA_VOLUME} && chown -R fairphone:fairphone ${FP_DATA_VOLUME}
 VOLUME ${FP_DATA_VOLUME}
 WORKDIR ${FP_DATA_VOLUME}
 
